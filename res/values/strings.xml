@@ -7,5 +7,11 @@
     <string name="title_activity_edit">EditActivity</string>
     <string name="add_title">Add Activity</string>
     <string name="edit_title">Edit Activity</string>
+    <string name="add_button">Add</string>
+    <string name="edit_button">Edit</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="checkin_label">Checkin</string>
+    <string name="add_checkin_button">Add Checkin</string>
+    <string name="edit_checkin_button">Edit Checkin</string>
 
 </resources>
