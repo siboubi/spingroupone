@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="YOUR_OWN_KEY" />
+            android:value="AIzaSyDTof5O6Dbe6EGlUaoawD8_BQ6nRjXbxsQ" />
 
         <activity
             android:name="com.sogeti.siboubib.spingroupone.MapActivity"

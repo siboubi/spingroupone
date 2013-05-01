@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -16,18 +15,17 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sogeti.siboubib.spingroupone.model.Checkins;
 
-public class MapActivity extends ListActivity implements GpsStatus.Listener,
+public class MapActivity extends FragmentActivity implements GpsStatus.Listener,
 		LocationListener {
 	private GpsStatus mStatus;
 	private LocationManager mLocationManager;
@@ -61,7 +59,7 @@ public class MapActivity extends ListActivity implements GpsStatus.Listener,
 							List<Checkins> list = getModel(responses);
 							MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(
 									thisActivity, list);
-							setListAdapter(adapter);
+//							setListAdapter(adapter);
 
 							super.onSuccess(responses);
 						}
@@ -70,29 +68,29 @@ public class MapActivity extends ListActivity implements GpsStatus.Listener,
 			// TODO: handle exception
 		}
 
-		getListView().setOnItemClickListener(new OnItemClickListener() {
-			
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-
-				if (mActionMode != null) {
-					return;
-				}
-				selectedItem = position;
-
-				// Start the CAB using the
-				// ActionMode.Callback defined above
-//				mActionMode = MapActivity.this
-//						.startActionMode(mActionModeCallback);
-				Toast.makeText(thisActivity, "onGpsStatusChanged", Toast.LENGTH_LONG).show();
-				Checkins checkin = mList.get(position);
-				startEditCheckinIntent(checkin.getId());
-				view.setSelected(true);
-				return;
-			}
-		});
+//		getListView().setOnItemClickListener(new OnItemClickListener() {
+//			
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//
+//				if (mActionMode != null) {
+//					return;
+//				}
+//				selectedItem = position;
+//
+//				// Start the CAB using the
+//				// ActionMode.Callback defined above
+////				mActionMode = MapActivity.this
+////						.startActionMode(mActionModeCallback);
+//				Toast.makeText(thisActivity, "onGpsStatusChanged", Toast.LENGTH_LONG).show();
+//				Checkins checkin = mList.get(position);
+//				startEditCheckinIntent(checkin.getId());
+//				view.setSelected(true);
+//				return;
+//			}
+//		});
 
 	}
 

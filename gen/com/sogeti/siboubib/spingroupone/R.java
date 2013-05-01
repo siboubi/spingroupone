@@ -154,21 +154,20 @@ containing a value of this type.
         public static final int icon_share=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f040014;
-        public static final int button1=0x7f040011;
+        public static final int action_settings=0x7f040013;
         public static final int buttonAddCheckin=0x7f040009;
         public static final int buttonEditCheckin=0x7f04000f;
         public static final int editTextWhat=0x7f040008;
         public static final int editTextWhere=0x7f040006;
         public static final int hybrid=0x7f040004;
-        public static final int icon=0x7f040013;
-        public static final int label=0x7f040012;
-        public static final int list=0x7f040010;
-        public static final int menu_add_checkin=0x7f040018;
-        public static final int menu_bookmark=0x7f040016;
-        public static final int menu_edit_checkin=0x7f040019;
-        public static final int menu_main=0x7f040015;
-        public static final int menu_save=0x7f040017;
+        public static final int icon=0x7f040012;
+        public static final int label=0x7f040011;
+        public static final int map=0x7f040010;
+        public static final int menu_add_checkin=0x7f040017;
+        public static final int menu_bookmark=0x7f040015;
+        public static final int menu_edit_checkin=0x7f040018;
+        public static final int menu_main=0x7f040014;
+        public static final int menu_save=0x7f040016;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int satellite=0x7f040002;
