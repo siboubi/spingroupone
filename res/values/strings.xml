@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">spingroupone</string>
+    <string name="app_name">Checkins Apps</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_edit">EditActivity</string>
-    <string name="add_title">Add Activity</string>
-    <string name="edit_title">Edit Activity</string>
+    <string name="title_activity_edit">Edit Checkin</string>
+    <string name="add_title">Add Checkin</string>
+    <string name="edit_title">Edit Checkin</string>
     <string name="add_button">Add</string>
     <string name="edit_button">Edit</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Map of Checkins</string>
     <string name="checkin_label">Checkin</string>
     <string name="add_checkin_button">Add Checkin</string>
     <string name="edit_checkin_button">Edit Checkin</string>
+    <string name="title_activity_base">Map of Checkins</string>
+    <string name="home_label">Map Activity</string>
+    <string name="where_label">Where are you?</string>
+    <string name="what_label">What\'s going on?</string>
+    <string name="addcheckin_error">ERROR: Could not add the checkin</string>
+    <string name="editcheckin_error">ERROR: Could not edit the checkin</string>
+    <string name="addcheckin_start">SENT ADD CHECKIN</string>
+    <string name="addcheckin_finish">FINISHED ADD CHECKIN</string>
+    <string name="editcheckin_start">SENT EDIT CHECKIN</string>
+    <string name="editcheckin_finish">FINISHED EDIT CHECKIN</string>
+    <string name="cant_connect_error">Can\'t connect to the Internet. Check your network connectivity</string>
+    <string name="waiting_data_msg">WAITING FOR DATA...</string>
 
 </resources>
