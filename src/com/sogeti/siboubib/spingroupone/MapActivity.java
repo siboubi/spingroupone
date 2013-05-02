@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -22,6 +23,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sogeti.siboubib.spingroupone.model.Checkins;
 
@@ -35,12 +41,14 @@ public class MapActivity extends FragmentActivity implements GpsStatus.Listener,
 	public int selectedItem = -1;
 	private Context thisActivity;
 	final List<Checkins> mList = new ArrayList<Checkins>();
+	private GoogleMap mMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		thisActivity = this;
-		// setContentView(R.layout.activity_map);
+		 setContentView(R.layout.activity_map);
+		 setUpMapIfNeeded();
 		// Set up GPS
 		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
@@ -50,23 +58,6 @@ public class MapActivity extends FragmentActivity implements GpsStatus.Listener,
 		//
 		// final TextView textView = (TextView) findViewById(R.id.mapTextView);
 		// textView.setText(getString(R.string.waiting_data_msg));
-		try {
-			TrainingRESTClient.get("checkins/json", null,
-					new JsonHttpResponseHandler() {
-						@Override
-						public void onSuccess(JSONArray responses) {
-							// Set Up list view
-							List<Checkins> list = getModel(responses);
-							MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(
-									thisActivity, list);
-//							setListAdapter(adapter);
-
-							super.onSuccess(responses);
-						}
-					});
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 
 //		getListView().setOnItemClickListener(new OnItemClickListener() {
 //			
@@ -93,6 +84,12 @@ public class MapActivity extends FragmentActivity implements GpsStatus.Listener,
 //		});
 
 	}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMapIfNeeded();
+    }
 
 	private List<Checkins> getModel(JSONArray responses) {
 		for (int i = 0; i < responses.length(); i++) {
@@ -269,5 +266,67 @@ public class MapActivity extends FragmentActivity implements GpsStatus.Listener,
 	// Toast.makeText(MapActivity.this, String.valueOf(selectedItem),
 	// Toast.LENGTH_LONG).show();
 	// }
+
+    /**
+     * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
+     * installed) and the map has not already been instantiated.. This will ensure that we only ever
+     * call {@link #setUpMap()} once when {@link #mMap} is not null.
+     * <p>
+     * If it isn't installed {@link SupportMapFragment} (and
+     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
+     * install/update the Google Play services APK on their device.
+     * <p>
+     * A user can return to this FragmentActivity after following the prompt and correctly
+     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not have been
+     * completely destroyed during this process (it is likely that it would only be stopped or
+     * paused), {@link #onCreate(Bundle)} may not be called again so we should call this method in
+     * {@link #onResume()} to guarantee that it will be called.
+     */
+    private void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+                setUpMap();
+            }
+        }
+    }
+
+    /**
+     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
+     * just add a marker near Africa.
+     * <p>
+     * This should only be called once and when we are sure that {@link #mMap} is not null.
+     */
+    private void setUpMap() {
+    	FragmentManager fragmentManager = getFragmentManager();  
+        MapFragment mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.map);
+    	mMap = mapFragment.getMap();
+//		mMap.getMyLocation();
+
+		try {
+			TrainingRESTClient.get("checkins/json", null,
+					new JsonHttpResponseHandler() {
+						@Override
+						public void onSuccess(JSONArray responses) {
+							// Set Up list view
+							List<Checkins> list = getModel(responses);
+							for (Checkins checkin : list) {
+								mMap.addMarker(new MarkerOptions().position(new LatLng(checkin.getMlatitude().doubleValue(), checkin.getMlongitude().doubleValue())).title(checkin.getTitle()));
+							}
+							MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(
+									thisActivity, list);
+//							setListAdapter(adapter);
+
+							super.onSuccess(responses);
+						}
+					});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
 
 }
